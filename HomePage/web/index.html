@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bless Business</title>
+
+        <!-- This is how you link to an external style sheet. -->
+        <link href="style/myStyle.css" rel="stylesheet" type="text/css" />  
+
+    </head>
+    <body>
+
+        <div id="titleNav">
+
+            <!-- The style sheet has pageTitle floated left -->
+            <div id="pageTitle">
+                BLESSED BUSINESS
+            </div>
+
+            <!-- The style sheet has nav floated right -->
+            <div id="nav">
+                <div><a onclick = " ajaxCall('htmlPartials/homeContent.html', setContent, setError) ">Home</a></div>
+                <div><a onclick = " ajaxCall('htmlPartials/blogContent.html', setContent, setError) ">Blog</a></div>
+            </div>
+
+            <!-- Must stop the floating so that elements below (e.g., content) 
+            don't float up into here. -->
+            <div class="stopFloat"></div>
+        </div>
+
+        <div id="content">
+          
+        </div> <!-- content. [[Keep track of nesting]] -->
+            
+        <div id="footer">
+             Kouassi Tchokoto   
+        </div>
+
+        <!-- It is as if the code from this javascript file was copy/pasted here. -->
+        <script src="js/ajaxUtilities.js"></script>
+
+        <script>
+
+                    // Place the contents of the file url into the 
+                    // innerHTML property of the HTML element with id "content". 
+                    function setContent(httpRequest) {
+                        console.log("Ajax call was successful.");
+                        document.getElementById("content").innerHTML = httpRequest.responseText;
+                    }
+
+                    function setError(httpRequest) {
+                        console.log("Ajax call was NOT successful.");
+                        console.log(httpRequest);
+                        document.getElementById("content").innerHTML = httpRequest.errorMsg;
+                    }
+
+                    // Make sure initial page load has home content displayed. 
+                    ajaxCall('htmlPartials/homeContent.html', setContent, setError);
+
+        </script>
+
+    </body>
+</html>
